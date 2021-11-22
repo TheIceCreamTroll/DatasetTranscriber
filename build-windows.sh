@@ -1,0 +1,1 @@
+npx electron-builder build -w portable
