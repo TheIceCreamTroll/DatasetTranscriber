@@ -1,43 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Transcriber</title>
-
-    <link rel="stylesheet" href="index.css">
-
-  </head>
-  <body id="body">
-    <div id="all">
-    
-    <br>
-    <br>
-    
-    <div id="stickymenu">
-      <p id="error-bar" title="Click to dismiss" onclick="UpdateMessageBar('')" tabindex="-1"></p>
-      <button id="btn-load" class="menuButton" onclick="updateDirectory()" tabindex="-1">Load</button>
-      <button id="btn-check" class="menuButton" onclick="checkEmptyLines()" tabindex="-1">Check Empty Lines</button>
-      <button id="btn-help" class="menuButton" onclick="readme()" tabindex="-1">Info</button>
-      <span id="delim-box">Delimiter: <input id="delim" type="text" size="2" value="|" onkeyup="saveTranscriptionAsText(showError=false)" tabindex="-1"/></span>
-    </div>
-    
-    <form>
-    <br><br>
-    
-
-    <table id="main-table">
-      <tbody id="tbl">
-
-        <tr>
-          <td class="tblhead"><strong>#</strong></td>
-          <td id="tbl-filename" class="tblhead"><strong>Filename</strong></td>
-          <td id="tbl-text" class="tblhead"><strong>Transcription</strong></td>
-        </tr>
-      </tbody>
-      </table>
-
-      </form>
-      </div> 
-      <script src="listmaker.js"></script>
-  </body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Transcriber</title>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body id="body">
+        <div id="all">
+            <br><br>
+            <div id="stickymenu">
+                <p id="error-bar" title="Click to dismiss" onclick="UpdateMessageBar('')" tabindex="-1"></p>
+                <button id="btn-load" class="menuButton" onclick="updateDirectory()" tabindex="-1">Load</button>
+                <button id="btn-check" class="menuButton" onclick="checkEmptyLines()" tabindex="-1">Check Empty Lines</button>
+                <button id="btn-help" class="menuButton" onclick="readme()" tabindex="-1">Info</button>
+                <span id="delim-box">Delimiter: <input id="delim" type="text" size="2" value="|" onkeyup="saveTranscriptionAsText(showError=false)" tabindex="-1"/></span>
+            </div>
+            <form>
+                <br><br>
+                <table id="main-table">
+                    <tbody id="tbl">
+                        <tr>
+                            <td class="tblhead"><strong>#</strong></td>
+                            <td id="tbl-delete" class="tblhead"><strong></strong></td>
+                            <td id="tbl-filename" class="tblhead"><strong>Filename</strong></td>
+                            <td id="tbl-text" class="tblhead"><strong>Transcription</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div> 
+        <script src="listmaker.js"></script>
+    </body>
 </html>

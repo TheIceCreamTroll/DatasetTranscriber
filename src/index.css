@@ -4,7 +4,6 @@
     --secondary-bg-color: #2b2b2b;
     --text-color: #eee;
 }
-  
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -23,7 +22,6 @@ input {
     height: 100%;
     outline: none;
 }
-
 
 table {
     border-collapse: collapse;
@@ -94,6 +92,22 @@ td, th {
     text-decoration: none;
     display: inline-block;
     width: 100%;
+}
+
+.deleteButton {
+    background-color: var(--main-bg-color); 
+    border: none;
+    color: var(--text-color);
+    font-size: 14px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    /*border: 1px solid red;
+     border-radius: 3px; */
+}
+
+.deleteButton:hover {
+    background-color: rgb(206, 36, 36);
+    color: var(--main-bg-color);
 }
 
 button:hover {

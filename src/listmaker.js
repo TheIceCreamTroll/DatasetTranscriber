@@ -50,10 +50,12 @@ function loadFileList(directoryPath) {
             //Create table data elements
             const row = table.insertRow(1);
             const cellNumber = row.insertCell(0);
-            const cellFilename = row.insertCell(1);
-            const cellText = row.insertCell(2); 
+            const deleteButton = row.insertCell(1); 
+            const cellFilename = row.insertCell(2);
+            const cellText = row.insertCell(3);
 
             cellNumber.innerHTML = `<span class="line-number">${lineNumber}</span>`;
+            deleteButton.innerHTML = `<button class="deleteButton" name="${file}" type="button" onclick="deleteRow(this.name);" tabindex="-1">delete</button>`;
             cellFilename.innerHTML = `<button class="playButton" value="button" type="button" onclick="playAudio(this.innerHTML)" tabindex="-1">${file}</button>`;
             cellText.innerHTML = `<input class="textBox" name="${file}" type="text" onkeyup="saveTranscriptionAsText();" value="${text}" />`;
 
@@ -62,8 +64,18 @@ function loadFileList(directoryPath) {
     });
 }
 
+function deleteRow(filename) {
+    try {
+        fs.unlinkSync(path.join(directoryPath, filename));
+        loadFileList(directoryPath);
+        saveTranscriptionAsText();
+
+    } catch (error) {
+        UpdateMessageBar(error);
+    }
+}
+
 function saveTranscriptionAsText(showError=true) {
-    console.log(showError);
     if (directoryPath === "") {
         if (showError == false) {
             return;
@@ -148,4 +160,4 @@ document.addEventListener('drop', (event) => {
 document.addEventListener('dragover', (e) => {
     e.preventDefault();
     e.stopPropagation();
-  });
+});
