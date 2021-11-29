@@ -1,4 +1,4 @@
-const { app, BrowserWindow, dialog} = require('electron');
+const { app, BrowserWindow, dialog, Menu, MenuItem } = require('electron');
 const path = require('path');
 const ipc = require('electron').ipcMain;
 
@@ -17,15 +17,37 @@ const createWindow = () => {
             contextIsolation: false,
             enableRemoteModule: true
     }
-  });
+});
 
     // and load the index.html of the app.
     mainWindow.loadFile(path.join(__dirname, 'index.html'));
     mainWindow.setMenuBarVisibility(false);
 
     // Open the DevTools.
-    //mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools();
 
+    // Spellchecker context menu
+    mainWindow.webContents.on('context-menu', (event, params) => {
+        const menu = new Menu()
+
+        for (const suggestion of params.dictionarySuggestions) {
+            menu.append(new MenuItem({
+                label: suggestion,
+                click: () => mainWindow.webContents.replaceMisspelling(suggestion)
+            }))
+        }
+
+        if (params.misspelledWord) {
+            menu.append(
+                new MenuItem({
+                label: 'Add to dictionary',
+                click: () => mainWindow.webContents.session.addWordToSpellCheckerDictionary(params.misspelledWord)
+                })
+            )
+        }
+
+        menu.popup()
+    })
 };
 
     // This method will be called when Electron has finished
