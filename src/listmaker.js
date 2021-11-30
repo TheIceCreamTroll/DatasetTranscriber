@@ -161,4 +161,5 @@ document.addEventListener('dragover', (event) => {
 
 window.addEventListener("keydown", function (event) {
     if (event.key == "Control") { playAudio(document.activeElement.name); }
+    if (event.key == "`") { deleteRow(document.activeElement.name); }
 });
