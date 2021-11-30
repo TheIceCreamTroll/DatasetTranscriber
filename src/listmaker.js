@@ -124,10 +124,8 @@ function UpdateMessageBar(message) {
 
 function loadfile() {
     let dict = {};
-
-    const filepath = path.join(directoryPath, TranscriptionFileName); //May be redundant, but very unimportant
     const delim = document.getElementById("delim").value;
-    const lines = ( fs.readFileSync(filepath, 'utf-8', {flag: 'r'}) ).split('\n');
+    const lines = (fs.readFileSync(path.join(directoryPath, TranscriptionFileName), 'utf-8', {flag: 'r'})).split('\n');
 
     lines.forEach(line => { 
         if (line.length > 0) {
@@ -148,7 +146,6 @@ document.addEventListener('drop', (event) => {
         return;
     }
     for (const f of event.dataTransfer.files) {
-        
         if (fs.lstatSync(f.path).isDirectory()) { 
             directoryPath = f.path;
             loadFileList(f.path); 
@@ -157,7 +154,11 @@ document.addEventListener('drop', (event) => {
     }
 });
   
-document.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+document.addEventListener('dragover', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+});
+
+window.addEventListener("keydown", function (event) {
+    if (event.key == "Control") { playAudio(document.activeElement.name); }
 });
