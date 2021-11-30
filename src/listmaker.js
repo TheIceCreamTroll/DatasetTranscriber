@@ -66,6 +66,10 @@ function loadFileList(directoryPath) {
 
 function deleteRow(filename) {
     try {
+        if (filename == undefined) {
+            UpdateMessageBar("Nothing was selected so nothing was deleted.");
+            return;
+        }
         fs.unlinkSync(path.join(directoryPath, filename));
         loadFileList(directoryPath);
         saveTranscriptionAsText();
