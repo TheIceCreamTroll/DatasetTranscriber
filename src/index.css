@@ -82,6 +82,11 @@ td, th {
     font-size: 16px;
 }
 
+.menuButton:hover {
+    background-color: var(--secondary-bg-color);
+    /*transition: background-color 100ms ease; */
+}
+
 .playButton {
     background-color: var(--secondary-bg-color); 
     border: none;
@@ -93,6 +98,12 @@ td, th {
     display: inline-block;
     width: 100%;
 }
+
+.playButton:hover {
+    background-color: var(--main-bg-color);
+    /*transition: background-color 100ms ease; */
+}
+
 
 .deleteButton {
     background-color: var(--main-bg-color); 
@@ -110,10 +121,7 @@ td, th {
     color: var(--main-bg-color);
 }
 
-button:hover {
-    background-color: black;
-    /*transition: background-color 100ms ease; */
-}
+
 
 .line-number {
     display: block;
