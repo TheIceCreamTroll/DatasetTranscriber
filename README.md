@@ -2,21 +2,23 @@
 
 Made with Electron and Javascript. 
 
+![UI](https://user-images.githubusercontent.com/33820904/143992060-e2b190c9-d3e1-4959-b558-83b714560bb1.png)
+
 ### Loading a folder
 
-When you load a folder, Transcriber will look for, and try to import transcription.txt.
-In order for transcriptions to be successful imported, they must follow the example shown below.
+Either drag and drop, or hit "Load" to load a folder. When you load one, Transcriber will look for, and try to import transcription.txt.
+In order for it to be successful imported, each line must follow the example shown below.
 The name of the parent folder must be enclosed in two forward slashes, and the filename must be between the second forward slash and the delimiter.
 Filenames with certain special characters (#,&) may not play, so stick with alphanumeric filenames.
 By default, the delimiter is set to "|" but this can be changed in the delimiter text box.
-Very large folders (more than 10k files) should be split up into multiple smaller folders, and combined on completion.
+Very large folders (more than 10k files) cause the UI to lag, and should be split up into multiple smaller folders, and combined on completion.
 
- Example: /foldername/filename.flac|Never going to...  
+Example: /foldername/filename.flac|Never going to...  
 
 ---
 ### Saving transcriptions
 
-Transcriber will always save transcriptions as transcription.txt in the active folder.
+Transcriber will always save transcriptions as transcription.txt in the active folder. To play the audio file for a specific line, click the filename, or press the control key.
 By default, transcriptions are formatted for 15.ai.
 
 ### Building
