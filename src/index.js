@@ -89,7 +89,7 @@ ipc.on('open-folder-dialog', function (event) {
 const createReadme = () => {
     const subWindow = new BrowserWindow({
         width: 600,
-        height: 820,
+        height: 1010,
         alwaysOnTop: true,
         webPreferences: {
             //Placeholder

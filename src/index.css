@@ -23,18 +23,26 @@ input {
     outline: none;
 }
 
-table {
-    border-collapse: collapse;
-    position: absolute;
-    vertical-align: middle;
-    width: 95%;
-}
-  
 td, th {
     border: 1px solid #999;
     margin: 5px;
     /* padding: 0.5rem;*/ /* More spaced out*/
     padding: 0.2rem, 0.2rem; /* More compact*/
+}
+
+#main-table {
+    border-collapse: collapse;
+    position: absolute;
+    vertical-align: middle;
+    width: 95%;
+}
+
+#shortcut-table {
+    border-collapse: collapse;
+}
+
+#shortcut-table td {
+    padding: 5px;
 }
 
 #delim-box {
@@ -104,7 +112,6 @@ td, th {
     /*transition: background-color 100ms ease; */
 }
 
-
 .deleteButton {
     background-color: var(--main-bg-color); 
     border: none;
@@ -120,8 +127,6 @@ td, th {
     background-color: rgb(206, 36, 36);
     color: var(--main-bg-color);
 }
-
-
 
 .line-number {
     display: block;
