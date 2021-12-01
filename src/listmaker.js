@@ -55,24 +55,35 @@ function loadFileList(directoryPath) {
             const cellText = row.insertCell(3);
 
             cellNumber.innerHTML = `<span class="line-number">${lineNumber}</span>`;
-            deleteButton.innerHTML = `<button class="deleteButton" name="${file}" type="button" onclick="deleteRow(this.name);" tabindex="-1">delete</button>`;
+            deleteButton.innerHTML = `<button class="deleteButton" name="${file}" type="button" onclick="deleteRow(this);" tabindex="-1">delete</button>`;
             cellFilename.innerHTML = `<button class="playButton" value="button" type="button" onclick="playAudio(this.innerHTML)" tabindex="-1">${file}</button>`;
-            cellText.innerHTML = `<input class="textBox" name="${file}" type="text" onkeyup="saveTranscriptionAsText();" value="${text}" />`;
+            cellText.innerHTML = `<input id="${lineNumber}" class="textBox" name="${file}" type="text" onkeyup="saveTranscriptionAsText();" value="${text}" />`;
 
             lineNumber++
         }
     });
 }
 
-function deleteRow(filename) {
+function deleteRow(file) {
+    filename = file.name;
+    lineNumber = parseInt(file.id);
+    console.log(lineNumber);
+
     try {
         if (filename == undefined) {
             UpdateMessageBar("Nothing was selected so nothing was deleted.");
             return;
         }
+
         fs.unlinkSync(path.join(directoryPath, filename));
         loadFileList(directoryPath);
         saveTranscriptionAsText();
+
+        try { document.getElementById((lineNumber - 1)).focus(); }
+        catch { 
+            try { document.getElementById((lineNumber)).focus(); } 
+            catch { return; /* ¯\_(ツ)_/¯ */ }
+        }
 
     } catch (error) {
         UpdateMessageBar(error);
@@ -165,5 +176,5 @@ document.addEventListener('dragover', (event) => {
 
 window.addEventListener("keydown", function (event) {
     if (event.key == "Control") { playAudio(document.activeElement.name); }
-    if (event.key == "`") { deleteRow(document.activeElement.name); }
+    if (event.key == "`") { deleteRow(document.activeElement); event.preventDefault(); }
 });
