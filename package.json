@@ -1,7 +1,7 @@
 {
   "name": "DatasetTranscriber",
   "productName": "DatasetTranscriber",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "description": "Make manual transcription easier",
   "main": "src/index.js",
   "scripts": {
