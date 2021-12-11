@@ -121,7 +121,7 @@ function checkEmptyLines() {
     for (let i = 0; i < rows.length; i++) { //Change this to only show the rows that are empty, without deleting all the non-empty ones ofc. Or.... Need to either reverse the order it goes in, or get the name/id instead of using i (since it's asceding instead of decsending.)
         if (rows[i].value === "")
         {
-            emptyLines.push(" " + rows[i].id );
+            emptyLines.push(" " + rows[i].id);
         }
     }
         if (emptyLines.length !== 0) {
