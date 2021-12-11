@@ -13,10 +13,12 @@ function readme() {
 
 function updateDirectory() {
     ipc.send('open-folder-dialog');
-    ipc.on('selected-folder', function (event, result) {
-        directoryPath = String(result['filePaths']);
-        if (! directoryPath == "") { loadFileList(directoryPath); }
-        else { return; }
+    ipc.on('selected-folder', function (result) {
+        if (result['canceled'] == false) {
+            directoryPath = String(result['filePaths']);
+            if (! directoryPath == "") { loadFileList(directoryPath); }
+            else { return; }
+        }
     })
 }
 
@@ -55,7 +57,7 @@ function loadFileList(directoryPath) {
             const cellText = row.insertCell(3);
 
             cellNumber.innerHTML = `<span class="line-number">${lineNumber}</span>`;
-            deleteButton.innerHTML = `<button class="deleteButton" id="${lineNumber}" name="${file}" type="button" onclick="deleteRow(this);" tabindex="-1">delete</button>`;
+            deleteButton.innerHTML = `<button class="deleteButton" name="${lineNumber}" type="button" onclick="deleteRow(this);" tabindex="-1">delete</button>`;
             cellFilename.innerHTML = `<button class="playButton" value="button" type="button" onclick="playAudio(this.innerHTML)" tabindex="-1">${file}</button>`;
             cellText.innerHTML = `<input id="${lineNumber}" class="textBox" name="${file}" type="text" onkeyup="saveTranscriptionAsText();" value="${text}" />`;
 
@@ -173,7 +175,14 @@ document.addEventListener('dragover', (event) => {
     event.stopPropagation();
 });
 
-window.addEventListener("keydown", function (event) {
-    if (event.key == "Control") { playAudio(document.activeElement.name); }
-    if (event.key == "`") { deleteRow(document.activeElement); event.preventDefault(); }
+keys = {};
+document.addEventListener("keydown", function (event) {
+    if (event.key == "`") { event.preventDefault(); deleteRow(document.activeElement); }
+    keys[event.key] = true;
+    
+});
+
+document.addEventListener("keyup", function (event) {
+    if (keys["Control"] && ! (keys["a"] || keys["c"] || keys["v"] || keys["x"])) { playAudio(document.activeElement.name); }
+    keys = {};
 });
