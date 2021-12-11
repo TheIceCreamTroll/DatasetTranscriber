@@ -8,7 +8,7 @@ var TranscriptionFileName = 'transcription.txt';
 var directoryPath = "";
 
 function readme() { 
-    ipc.send('open-readme'); 
+    ipc.send('open-readme');
 }
 
 function updateDirectory() {
@@ -55,7 +55,7 @@ function loadFileList(directoryPath) {
             const cellText = row.insertCell(3);
 
             cellNumber.innerHTML = `<span class="line-number">${lineNumber}</span>`;
-            deleteButton.innerHTML = `<button class="deleteButton" name="${file}" type="button" onclick="deleteRow(this);" tabindex="-1">delete</button>`;
+            deleteButton.innerHTML = `<button class="deleteButton" id="${lineNumber}" name="${file}" type="button" onclick="deleteRow(this);" tabindex="-1">delete</button>`;
             cellFilename.innerHTML = `<button class="playButton" value="button" type="button" onclick="playAudio(this.innerHTML)" tabindex="-1">${file}</button>`;
             cellText.innerHTML = `<input id="${lineNumber}" class="textBox" name="${file}" type="text" onkeyup="saveTranscriptionAsText();" value="${text}" />`;
 
@@ -67,7 +67,6 @@ function loadFileList(directoryPath) {
 function deleteRow(file) {
     filename = file.name;
     lineNumber = parseInt(file.id);
-    console.log(lineNumber);
 
     try {
         if (filename == undefined) {
@@ -119,10 +118,10 @@ function checkEmptyLines() {
     const rows = document.getElementsByClassName("textBox");
     let emptyLines = [];
 
-    for (let i = 0; i < rows.length; i++) {
+    for (let i = 0; i < rows.length; i++) { //Change this to only show the rows that are empty, without deleting all the non-empty ones ofc. Or.... Need to either reverse the order it goes in, or get the name/id instead of using i (since it's asceding instead of decsending.)
         if (rows[i].value === "")
         {
-            emptyLines.push(" "+(i+1));
+            emptyLines.push(" " + rows[i].id );
         }
     }
         if (emptyLines.length !== 0) {
