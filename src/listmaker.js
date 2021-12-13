@@ -13,11 +13,11 @@ function readme() {
 
 function updateDirectory() {
     ipc.send('open-folder-dialog');
-    ipc.on('selected-folder', function (result) {
-        if (result['canceled'] == false) {
+    ipc.on('selected-folder', function (event, result) {
+        if (result['canceled']==false) {
             directoryPath = String(result['filePaths']);
             if (! directoryPath == "") { loadFileList(directoryPath); }
-            else { return; }
+            else { return; } 
         }
     })
 }
@@ -120,10 +120,10 @@ function checkEmptyLines() {
     const rows = document.getElementsByClassName("textBox");
     let emptyLines = [];
 
-    for (let i = 0; i < rows.length; i++) { //Change this to only show the rows that are empty, without deleting all the non-empty ones ofc. Or.... Need to either reverse the order it goes in, or get the name/id instead of using i (since it's asceding instead of decsending.)
+    for (let i = 0; i < rows.length; i++) {
         if (rows[i].value === "")
         {
-            emptyLines.push(" " + rows[i].id);
+            emptyLines.push(" " + '<a onclick="document.getElementById((this.innerHTML)).focus();">'+rows[i].id+'</a>');
         }
     }
         if (emptyLines.length !== 0) {
