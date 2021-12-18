@@ -32,5 +32,6 @@ Example: /foldername/filename.flac|Never going to...
 Transcriber will always save transcriptions as transcription.txt in the active folder.\
 By default, transcriptions are formatted for 15.ai.
 
+---
 ### Building
 Install [NodeJS](https://nodejs.org/en/download/), [Electron-Forge](https://github.com/electron-userland/electron-forge), and [Electron-Builder](https://www.npmjs.com/package/electron-builder). Then run the .sh script for your platform. Additional build options can be found at [electron.build](https://www.electron.build/).
